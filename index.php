@@ -1,4 +1,19 @@
-<?php include 'navBar.php'; ?>
+<?php include 'navBar.php'; 
+require_once('database.php'); 
+
+$randomIdeaQuery = 'SELECT * 
+					FROM ideas
+					ORDER BY RAND()
+					LIMIT 1';
+$randomIdeaQuery = $db->prepare($randomIdeaQuery);
+$randomIdeaQuery->execute();
+$randomIdeaReturned = $randomIdeaQuery->fetch();
+$randomIdeaQuery->closeCursor();
+					
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +24,7 @@
 <body>
 	<main>
 	
-		<p>Testing</p>
+		<p><?php echo $randomIdeaReturned['idea']; ?></p>
 	</main>    
 <footer></footer>
 </body>
