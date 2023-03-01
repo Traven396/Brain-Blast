@@ -9,10 +9,13 @@ $randomIdeaQuery = $db->prepare($randomIdeaQuery);
 $randomIdeaQuery->execute();
 $randomIdeaReturned = $randomIdeaQuery->fetch();
 $randomIdeaQuery->closeCursor();
-					
 
 
-
+if(isset($_POST['generateButton'])) {
+	$randomIdeaQuery->execute();
+	$randomIdeaReturned = $randomIdeaQuery->fetch();
+	$randomIdeaQuery->closeCursor();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +28,9 @@ $randomIdeaQuery->closeCursor();
 	<main>
 	
 		<p><?php echo $randomIdeaReturned['idea']; ?></p>
+		<form method="post">
+			<input type="submit" name="generateButton" value="Generate new idea" />
+		</form>
 	</main>    
 <footer></footer>
 </body>
